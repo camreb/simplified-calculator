@@ -1,1 +1,3 @@
 # simplified-calculator
+
+Kalkulator testowy

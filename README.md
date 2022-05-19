@@ -1,4 +1,12 @@
 # simplified-calculator
+kalkulator uproszczony
 
-Kalkulator testowy
-test 123
+## Description
+The calculator has simple mathematical functions. It is presented in a GUI modeled on the Windows 10 simple calculator.
+
+## Running
+Open gui.py
+
+## Technologies
+Python 3.10
+tkinter module

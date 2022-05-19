@@ -5,7 +5,7 @@ kalkulator uproszczony
 The calculator has simple mathematical functions. It is presented in a GUI modeled on the Windows 10 simple calculator.
 
 ## Running
-Open gui.py
+Run kalkulator.py
 
 ## Technologies
 Python 3.10

@@ -19,12 +19,12 @@ class Calculator:
         # self.num2 is second given number for mathematical operation
 
         self.operation = ""
-        #self.operation is used to determine mathematical opeartion (adding, subtracting, multiplying, dividing)
+        # self.operation is used to determine mathematical operation (adding, subtracting, multiplying, dividing)
 
         self.result = 0
         # self.result is a result of mathematical operation
 
-### Math methods ###
+    ### Math methods ###
 
     def equal(self):
 
@@ -36,7 +36,6 @@ class Calculator:
                 self.num2 = self.num1
         self.e.delete(0, END)
 
-
         if self.operation == 'add':
             self.result = self.num1 + self.num2
         elif self.operation == 'subtract':
@@ -47,10 +46,11 @@ class Calculator:
             try:
                 self.result = self.num1 / self.num2
             except ZeroDivisionError:
-                self.e.insert(0, "Nie można dzielić przez zero")
+                self.e.insert(0, "Cannot divide by zero!")
+                return
         elif self.operation == "":
+            # Elif statement is used to return a number if no operation has been selected
             self.result = self.num2
-
 
         # "If" statement is used in order to correctly display integers (1.0 -> 1)
         if self.result - int(self.result) == 0:
@@ -58,46 +58,34 @@ class Calculator:
         else:
             self.e.insert(0, round(self.result, 10))
 
-
         # Set "self.first_operation" to "0" to allow multiple operations
-
+        self.first_operation = "0"
         if self.first_operation == "0":
             self.num1 = self.result
-        self.first_operation = "0"
 
     def button_add(self):
         self.operation = 'add'
-        if str2int(self.e.get()):
-            self.num1 = int(self.e.get())
-        else:
-            self.num1 = float(self.e.get())
+        self.str2float()
         self.e.delete(0, END)
         self.first_operation = "1"
 
     def button_subtract(self):
         self.operation = 'subtract'
-        if str2int(self.e.get()):
-            self.num1 = int(self.e.get())
-        else:
-            self.num1 = float(self.e.get())
+        self.str2float()
         self.e.delete(0, END)
         self.first_operation = "1"
 
     def button_multiply(self):
         self.operation = 'multiply'
-        if str2int(self.e.get()):
-            self.num1 = int(self.e.get())
-        else:
-            self.num1 = float(self.e.get())
+        self.str2float()
         self.e.delete(0, END)
         self.first_operation = "1"
 
     def button_divide(self):
         self.operation = 'divide'
-        self.num1 = float(self.e.get())
+        self.str2float()
         self.e.delete(0, END)
         self.first_operation = "1"
-
 
     ### Others methods ###
 
@@ -105,28 +93,39 @@ class Calculator:
         current = self.e.get()
         self.e.delete(0, END)
 
-        # set 0 as the default number
         if digit == "." in current:
-            pass
             self.e.insert(0, current)
+            # If statement used to not permit insertion more than 1 dot
         elif current == "0" and digit != ".":
             self.e.insert(0, digit)
+            # If statement used to not permit insertion more than 1 zero, if the zero is first digit in entry
+        elif " " in current and digit != ".":
+            self.e.insert(0, digit)
+            # If statement used to allow the insertion of a number after an Error Message 1/0 or sqrt(-1))
+        elif " " in current and digit == ".":
+            self.e.insert(0, current)
+            # If statement used to not permit insertion a dot after an Error Message (1/0 or sqrt(-1))
         else:
             self.e.insert(0, current + digit)
+            # All OK
+
+        self.first_operation = "1"
 
     def clear(self):
         self.e.delete(0, END)
         self.e.insert(0, "0")
 
-        #fix error: after selecting a number and clicking "=", the entry box always returns 0
+        # Following variables set to default values otherwise after selecting
+        # a number (1-9) and clicking "=", the entry box always returns 0
         self.num1 = 0
         self.num2 = 0
         self.result = 0
+        self.operation = ""
         self.first_operation = "1"
 
-    # Do uzupelnienia
     def clearentry(self):
-        return
+        self.e.delete(0, END)
+        self.e.insert(0, "0")
 
     def opposite(self):
         num = self.e.get()
@@ -143,51 +142,43 @@ class Calculator:
         if self.e.get() == "":
             self.e.insert(0, "0")
 
-
     def inverse(self):
         num = float(self.e.get())
         self.e.delete(0, END)
         if (1 / num).is_integer():
-            wynik = int(1 / num)
-            self.e.insert(0, wynik)
+            outcome = int(1 / num)
+            self.e.insert(0, outcome)
         else:
             self.e.insert(0, 1 / num)
 
     def sqr(self):
-        if str2int(self.e.get()):
-            num = int(self.e.get())
-        else:
-            num = float(self.e.get())
+        self.str2float()
         self.e.delete(0, END)
-        self.e.insert(0, num ** 2)
+        self.e.insert(0, self.num1 ** 2)
 
     def sqrt(self):
-        num = float(self.e.get()) ** 0.5
-        self.e.delete(0, END)
         try:
+            num = float(self.e.get()) ** 0.5
+            self.e.delete(0, END)
             if num - int(num) == 0:
                 self.e.insert(0, int(num))
             else:
                 self.e.insert(0, num)
-        except ZeroDivisionError:
-            self.e.insert(0, int(num))
+        except TypeError or ValueError:
+            self.e.insert(0, "Sqrt number cannot be lesser than 0!")
 
     def percent(self):
-            if self.e.get() != "":
-                num = float(self.e.get())
-                num = num / 100
-                self.e.delete(0, END)
-                self.e.insert(0, num)
-            else:
-                num = self.num1 / 100
-                self.e.insert(0, num)
+        if self.e.get() != "":
+            num = float(self.e.get())
+            num = num / 100
+            self.e.delete(0, END)
+            self.e.insert(0, num)
+        else:
+            num = self.num1 / 100
+            self.e.insert(0, num)
 
-
-def str2int(string_number):
-    try:
-        int(string_number)
-        return True
-    except (TypeError, ValueError):
-        return False
-
-
+    def str2float(self):
+        try:
+            self.num1 = float(self.e.get())
+        except ValueError:
+            pass

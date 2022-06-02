@@ -8,7 +8,6 @@ class Buttons:
         self.root = root
 
     def describe_interface(self):
-
         # Define Entry Box
         # Following e.get, e.insert, e.delete commands refer to Entry Box
         default_value = StringVar(self.root, value="0")
@@ -46,8 +45,6 @@ class Buttons:
         button_sqrt = Button(self.root, text='√x', padx=32, pady=15, command=operation.sqrt)
         button_percent = Button(self.root, text='%', padx=33, pady=15, command=operation.percent)
 
-
-
         # Put buttons on the screen
 
         button_1.grid(row=5, column=0)
@@ -76,4 +73,3 @@ class Buttons:
         button_inverse.grid(row=2, column=0)
         button_sqr.grid(row=2, column=1)
         button_sqrt.grid(row=2, column=2)
-

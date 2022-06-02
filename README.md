@@ -11,9 +11,8 @@ Python is required for this project. To download and install Python, please foll
 2. Run calculator.py
 
 ## Technologies
-Python 3.10
-
-tkinter module
+ - Python 3.10
+ - tkinter module
 
 ## Version
 Current version: 1.33

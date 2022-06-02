@@ -107,7 +107,7 @@ class Calculator:
             # If statement used to not permit insertion a dot after an Error Message (1/0 or sqrt(-1))
         else:
             self.e.insert(0, current + digit)
-            # All OK
+            # All OK.
 
         self.first_operation = "1"
 

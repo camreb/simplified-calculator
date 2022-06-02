@@ -1,11 +1,10 @@
 from buttons import *
 
 
-
 class Calc:
-
     def __init__(self, root):
         self.buttons = Buttons(root).describe_interface()
+
 
 root = Tk()
 calc = Calc(root)
@@ -19,4 +18,3 @@ window_position_vertical = int((screen_height / 2) - (window_height / 2))
 
 root.geometry('{}x{}+{}+{}'.format(window_width, window_height, window_position_horizontal, window_position_vertical))
 root.mainloop()
-

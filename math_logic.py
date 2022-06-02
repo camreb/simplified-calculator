@@ -1,4 +1,3 @@
-from buttons import *
 from tkinter import *
 
 
@@ -49,6 +48,8 @@ class Calculator:
                 self.result = self.num1 / self.num2
             except ZeroDivisionError:
                 self.e.insert(0, "Nie można dzielić przez zero")
+        elif self.operation == "":
+            self.result = self.num2
 
 
         # "If" statement is used in order to correctly display integers (1.0 -> 1)
@@ -59,9 +60,10 @@ class Calculator:
 
 
         # Set "self.first_operation" to "0" to allow multiple operations
-        self.first_operation = "0"
+
         if self.first_operation == "0":
             self.num1 = self.result
+        self.first_operation = "0"
 
     def button_add(self):
         self.operation = 'add'
@@ -97,15 +99,30 @@ class Calculator:
         self.first_operation = "1"
 
 
-    ### Others functions ###
+    ### Others methods ###
 
     def click(self, digit):
         current = self.e.get()
         self.e.delete(0, END)
-        self.e.insert(0, current + digit)
+
+        # set 0 as the default number
+        if digit == "." in current:
+            pass
+            self.e.insert(0, current)
+        elif current == "0" and digit != ".":
+            self.e.insert(0, digit)
+        else:
+            self.e.insert(0, current + digit)
 
     def clear(self):
         self.e.delete(0, END)
+        self.e.insert(0, "0")
+
+        #fix error: after selecting a number and clicking "=", the entry box always returns 0
+        self.num1 = 0
+        self.num2 = 0
+        self.result = 0
+        self.first_operation = "1"
 
     # Do uzupelnienia
     def clearentry(self):
@@ -122,6 +139,9 @@ class Calculator:
 
     def backspace(self):
         self.e.delete(self.e.index("end") - 1)
+        # If statement used in case if all digits were backspaced
+        if self.e.get() == "":
+            self.e.insert(0, "0")
 
 
     def inverse(self):

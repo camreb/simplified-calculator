@@ -11,4 +11,4 @@ Python 3.10
 tkinter module
 
 ## Version
-Current version: 1.21
+Current version: 1.32

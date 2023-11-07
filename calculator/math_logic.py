@@ -1,12 +1,12 @@
-from tkinter import *
+from tkinter import END
 
 
-class Calculator:
+class Calc:
 
     def __init__(self, entry_box):
 
         self.e = entry_box
-        # Following self.e.get, self.e.insert, self,e.delete commands refer to Entry Box
+        # Following self.e.get, self.e.insert, self.e.delete commands refer to Entry Box
 
         self.first_operation = "1"
         # self.first_operation is used to calculate properly with multiple analogical operations (2 * 2 * 2 ...)
@@ -24,7 +24,7 @@ class Calculator:
         self.result = 0
         # self.result is a result of mathematical operation
 
-    ### Math methods ###
+    ### Math ops ###
 
     def equal(self):
 
@@ -87,7 +87,7 @@ class Calculator:
         self.e.delete(0, END)
         self.first_operation = "1"
 
-    ### Others methods ###
+    ### Others ops ###
 
     def click(self, digit):
         current = self.e.get()

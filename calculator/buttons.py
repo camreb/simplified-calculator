@@ -1,5 +1,5 @@
-from tkinter import *
-from math_logic import Calculator
+from tkinter import Button, StringVar, Entry
+from calculator.math_logic import Calc
 
 
 class Buttons:
@@ -12,22 +12,20 @@ class Buttons:
         # Following e.get, e.insert, e.delete commands refer to Entry Box
         default_value = StringVar(self.root, value="0")
         entry_box = Entry(self.root, width=40, textvariable=default_value)
+
         # Put Entry Box on the screen
         entry_box.grid(row=0, column=0, columnspan=4, padx=10, pady=10)
 
-        operation = Calculator(entry_box)
+        operation = Calc(entry_box)
 
         # Define buttons
-        button_1 = Button(self.root, text='1', padx=35, pady=15, command=lambda: operation.click("1"))
-        button_2 = Button(self.root, text='2', padx=35, pady=15, command=lambda: operation.click("2"))
-        button_3 = Button(self.root, text='3', padx=35, pady=15, command=lambda: operation.click("3"))
-        button_4 = Button(self.root, text='4', padx=35, pady=15, command=lambda: operation.click("4"))
-        button_5 = Button(self.root, text='5', padx=35, pady=15, command=lambda: operation.click("5"))
-        button_6 = Button(self.root, text='6', padx=35, pady=15, command=lambda: operation.click("6"))
-        button_7 = Button(self.root, text='7', padx=35, pady=15, command=lambda: operation.click("7"))
-        button_8 = Button(self.root, text='8', padx=35, pady=15, command=lambda: operation.click("8"))
-        button_9 = Button(self.root, text='9', padx=35, pady=15, command=lambda: operation.click("9"))
-        button_0 = Button(self.root, text='0', padx=35, pady=15, command=lambda: operation.click("0"))
+        def button(number: str):
+            return Button(self.root, text=number, padx=35, pady=15, command=lambda: operation.click(number))
+
+        number_button = (button('1'), button('2'), button('3'), button('4'), button('5'), button('6'), button('7'),
+                         button('8'), button('9'), button('0'))
+        button_1, button_2, button_3, button_4, button_5, button_6, button_7, button_8, button_9, button_0 = number_button
+
 
         button_add = Button(self.root, text='+', padx=34, pady=15, command=operation.button_add)
         button_subtract = Button(self.root, text='-', padx=36, pady=15, command=operation.button_subtract)

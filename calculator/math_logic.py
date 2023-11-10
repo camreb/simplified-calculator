@@ -1,7 +1,7 @@
 from tkinter import END
 
 
-class Calc:
+class MathLogic:
 
     def __init__(self, entry_box):
 

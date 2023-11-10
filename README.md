@@ -15,4 +15,4 @@ Python is required for this project. To download and install Python, please foll
  - tkinter module
 
 ## Version
-Current version: 1.34
+Current version: 1.35

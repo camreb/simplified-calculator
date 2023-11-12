@@ -1,3 +1,5 @@
 from calculator import create_calculator
 
-calc = create_calculator("Calculator v1.34")
+if __name__ == '__main__':
+    calc = create_calculator("Calculator")
+

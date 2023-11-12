@@ -172,7 +172,9 @@ class MathLogic:
             self.e.insert(0, "Sqrt number cannot be lesser than 0!")
 
     def percent(self):
-        if self.e.get() != "":
+        if self.e.get() == '0':
+            pass
+        elif self.e.get() != "":
             num = float(self.e.get())
             num = num / 100
             self.e.delete(0, END)

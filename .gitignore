@@ -3,3 +3,6 @@ __pycache__
 
 # Pycharm
 .idea
+
+# pytest
+.pytest_cache

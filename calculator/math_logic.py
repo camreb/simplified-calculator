@@ -145,11 +145,15 @@ class MathLogic:
     def inverse(self):
         num = float(self.e.get())
         self.e.delete(0, END)
-        if (1 / num).is_integer():
-            outcome = int(1 / num)
-            self.e.insert(0, outcome)
-        else:
-            self.e.insert(0, 1 / num)
+        try:
+            if (1 / num).is_integer():
+                outcome = int(1 / num)
+                self.e.insert(0, outcome)
+            else:
+                self.e.insert(0, 1 / num)
+        except ZeroDivisionError:
+            if num == 0:
+                self.e.insert(0, 0)
 
     def sqr(self):
         self.str2float()
